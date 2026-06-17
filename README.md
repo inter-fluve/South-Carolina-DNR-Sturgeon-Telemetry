@@ -1,116 +1,135 @@
 # South-Carolina-DNR-Sturgeon-Telemetry
 
-## Raw Detection Cleaning
-Each river/lake system has its own cleaning script:
+Repository containing data ingestion, cleaning, harmonization, and exploratory analysis workflows for South Carolina Department of Natural Resources (SCDNR) Atlantic Sturgeon acoustic telemetry datasets.
 
-Santee River → clean_santee.R
+---
 
-Lakes Marion & Moultrie → clean_lakes.R
+## Repository Structure
 
-Cooper River → clean_cooper.R
+### Raw Detection Cleaning
 
-Each script:
+Each river/lake system has a dedicated cleaning script:
 
-Reads all raw CSVs in the system folder
+| System                  | Script           |
+| ----------------------- | ---------------- |
+| Santee River            | `Santee River Cleaning Script.R` |
+| Lakes Marion & Moultrie | `Lakes Cleaning Script.R`  |
+| Cooper River            | `Cooper Cleaning Script.R` |
 
-Aligns inconsistent column names
+Each cleaning script:
 
-Repairs misaligned latitude/longitude
+* Reads all raw CSV files within the system folder
+* Standardizes inconsistent column names
+* Repairs misaligned latitude/longitude fields
+* Converts numeric and datetime fields to consistent formats
+* Joins detections with harmonized tag metadata
+* Exports a cleaned and standardized dataset
 
-Converts numeric and datetime fields
+To regenerate any system-specific dataset, simply rerun the corresponding cleaning script.
 
-Joins with harmonized metadata
-
-Outputs a cleaned, standardized CSV
-
-To regenerate any system’s cleaned dataset:
-
-run the cleaning scripts
+---
 
 ## Metadata Harmonization
-SCDNR periodically issues updated tag metadata files.
-The pipeline automatically:
 
-Reads all metadata Excel files in the metadata folder
+SCDNR periodically provides updated tag metadata files. The metadata workflow automatically:
 
-Ignores Excel temp files (~$)
-
-Aligns columns across versions
-
-Combines them into a single metadata table
-
-Ensures consistent tag information across all rivers
+* Reads all metadata Excel files located in the `metadata/` directory
+* Ignores temporary Excel files (e.g., `~$*.xlsx`)
+* Aligns columns across metadata versions
+* Combines all metadata into a single harmonized table
+* Ensures consistent tag information across all river systems
 
 To update metadata:
 
-add new metadata files
+1. Add new metadata files to the `metadata/` folder.
+2. Rerun the cleaning scripts.
+
+---
 
 ## Master Ingest & Analysis
-master_ingest.R:
 
-Reads all three cleaned datasets
+The primary workflow is executed through:
 
-Harmonizes column types
+```r
+R Script.R
+```
+Found here: "I:\Shared drives\IFI\Projects_Active\SanteeCooper_FERC_19-04-09\IFI_TASKS\Task_Y_SturgUseofLock\SCDNR-Data-Analysis-Tasks\R Script.R"
 
-Collapses duplicate lat/long fields
+This script:
 
-Adds a river identifier
+* Reads all cleaned system datasets
+* Harmonizes column types across datasets
+* Consolidates duplicate latitude/longitude fields
+* Adds a river-system identifier
+* Produces a unified telemetry dataset (`DF`)
+* Generates exploratory visualizations
+* Creates receiver-level summary statistics
 
-Produces a unified dataset (DF)
+To run the full analysis pipeline, execute:
 
-Generates exploratory plots
+```r
+source("master_ingest.R")
+```
 
-Creates receiver‑level summaries
+---
 
-To run the full pipeline:
+## Pipeline Workflow
 
-run the master ingest script
+1. Place new raw detection files into their respective system folders.
+2. Place updated metadata Excel files into the `metadata/` folder.
+3. Run:
+
+   * `clean_santee.R`
+   * `clean_lakes.R`
+   * `clean_cooper.R`
+4. Run:
+
+   * `master_ingest.R`
+5. Review outputs in:
+
+```text
+/data/processed/
+```
+
+---
 
 ## Data Privacy & Security
-This repository does not contain:
 
-Raw sturgeon movement data
+This repository does **not** contain:
 
-Telemetry timestamps
+* Raw sturgeon movement data
+* Telemetry timestamps
+* Receiver coordinates
+* Sensitive biological metadata
+* Proprietary client information
 
-Receiver locations
+All raw telemetry data remain stored on Inter-Fluve's secure internal servers and are intentionally excluded from version control.
 
-Sensitive biological metadata
-
-All raw data remain stored on Inter‑Fluve’s secure shared drive and are not included in this repository.
-
-If you want a dedicated privacy section:
-
-add a data privacy section
+---
 
 ## Use of Generative AI
-Portions of the code in this repository were developed with assistance from Microsoft Copilot, consistent with Inter‑Fluve’s internal policies regarding the use of generative AI tools.
 
-No sturgeon movement data, telemetry records, or other sensitive project data were provided to Copilot during development. Only generalized code structure, file paths, and non‑sensitive workflow descriptions were used as prompts.
+Portions of the code in this repository were developed with assistance from Microsoft Copilot, consistent with Inter-Fluve's internal policies regarding the use of generative AI tools.
 
-All AI‑assisted code was reviewed, validated, and approved by Inter‑Fluve staff before implementation, and the final workflow reflects Inter‑Fluve’s technical standards and quality assurance practices.
+No sturgeon movement data, telemetry records, receiver locations, or other sensitive project information were provided to Copilot during development. Only generalized code structures, workflow descriptions, and non-sensitive programming questions were used.
 
-## How to Re‑Run the Entire Pipeline
-Place new raw detection files into their respective folders
+All AI-assisted code was reviewed, validated, and approved by Inter-Fluve staff prior to implementation. Final analyses and workflows reflect Inter-Fluve's technical standards, quality assurance procedures, and professional judgment.
 
-Place new metadata Excel files into the metadata folder
-
-Run the three cleaning scripts
-
-Run master_ingest.R
-
-Review outputs in /data/processed/
-
-If you want a step‑by‑step guide:
-
-add a pipeline update section
+---
 
 ## Future Improvements
-Automated QA/QC reporting
 
-Receiver‑level mapping with sf/leaflet
+Potential enhancements include:
 
-Automated detection‑per‑tag summaries
+* Automated QA/QC reporting
+* Receiver-level mapping using `sf` and `leaflet`
+* Automated detection-per-tag summaries
+* Spatial movement visualizations
+* Integration with habitat suitability and restoration assessment workflows
+* Automated report generation
 
-Integration with HSI model outputs
+---
 
+## Contact
+
+For questions regarding workflow implementation or project-specific data access, contact the repository maintainer or Inter-Fluve project manager.
