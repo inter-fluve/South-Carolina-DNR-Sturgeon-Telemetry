@@ -62,10 +62,3 @@ All AI-assisted code was reviewed, validated, and approved by Inter-Fluve staff 
 
 ---
 
-## Notes
-
-* Raw telemetry data are not stored in this repository.
-* All scripts assume the directory structure described in the top-level README.
-* Outputs are written to the designated processed-data directory or project shared drive.
-* Sensitive telemetry information, receiver locations, and biological data remain outside version control.
-
