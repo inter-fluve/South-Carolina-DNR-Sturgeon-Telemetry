@@ -65,12 +65,6 @@ This script:
 * Generates exploratory visualizations
 * Creates receiver-level summary statistics
 
-To run the full analysis pipeline, execute:
-
-```r
-source("master_ingest.R")
-```
-
 ---
 
 ## Pipeline Workflow
