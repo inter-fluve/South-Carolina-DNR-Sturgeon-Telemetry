@@ -79,17 +79,13 @@ source("master_ingest.R")
 2. Place updated metadata Excel files into the `metadata/` folder.
 3. Run:
 
-   * `clean_santee.R`
-   * `clean_lakes.R`
-   * `clean_cooper.R`
+   * `Santee River Cleaning Script.R`
+   * `Lakes Cleaning Script.R`
+   * `Cooper Cleaning Script.R`
 4. Run:
 
-   * `master_ingest.R`
-5. Review outputs in:
-
-```text
-/data/processed/
-```
+   * `R Script.R`
+5. Review outputs
 
 ---
 
@@ -132,4 +128,4 @@ Potential enhancements include:
 
 ## Contact
 
-For questions regarding workflow implementation or project-specific data access, contact the repository maintainer or Inter-Fluve project manager.
+For questions regarding workflow implementation or project-specific data access, contact the repository maintainer or Inter-Fluve project manager: Tim Brush, Matt DeAngelo, or Rachel Roday (for legacy code)
