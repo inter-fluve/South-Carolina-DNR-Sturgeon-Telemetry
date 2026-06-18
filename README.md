@@ -1,6 +1,6 @@
 # South-Carolina-DNR-Sturgeon-Telemetry
 
-Repository containing data ingestion, cleaning, harmonization, and exploratory analysis workflows for South Carolina Department of Natural Resources (SCDNR) Atlantic Sturgeon acoustic telemetry datasets.
+Repository containing data ingestion, cleaning, harmonization, and exploratory analysis workflows for South Carolina Department of Natural Resources (SCDNR) Sturgeon acoustic telemetry datasets.
 
 ---
 
